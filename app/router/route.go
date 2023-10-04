@@ -14,12 +14,13 @@ func Init(init *config.Initialization) *gin.Engine {
 	api := router.Group("/api")
 	{
 		user := api.Group("/user")
-		user.GET("", init.UserCtrl.GetAllUserData)
-		user.POST("", init.UserCtrl.AddUserData)
-		user.GET("/:userID", init.UserCtrl.GetUserById)
-		user.PUT("/:userID", init.UserCtrl.UpdateUserData)
-		user.DELETE("/:userID", init.UserCtrl.DeleteUser)
+		user.POST("/login", init.UserCtrl.GetAllUserData)
+		user.POST("/register", init.UserCtrl.AddUserData)
+		user.POST("/refreshToken", init.UserCtrl.RefreshToken)
+		user.POST("/verifyEmail", init.UserCtrl.VerifyEmail)
+		user.GET("/:userEmail", init.UserCtrl.GetUserByEmail)
+		user.PUT("/:userEmail", init.UserCtrl.UpdateUserData)
+		user.DELETE("/:userEmail", init.UserCtrl.DeleteUser)
 	}
-
 	return router
 }
